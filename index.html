@@ -36,18 +36,13 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       backdrop-filter: blur(10px);
       text-align: center;
+      position: relative;
     }
 
     h1 {
-      margin: 0 0 14px;
+      margin: 0 0 20px;
       font-size: clamp(26px, 5vw, 38px);
       line-height: 1.15;
-    }
-
-    .sub {
-      margin: 0 0 22px;
-      font-size: clamp(14px, 3.4vw, 16px);
-      opacity: 0.9;
     }
 
     .btns {
@@ -69,7 +64,7 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.12);
       user-select: none;
       touch-action: manipulation;
-      min-width: 140px;
+      min-width: 120px;
     }
 
     button:active {
@@ -85,11 +80,7 @@
     #noBtn {
       background: var(--no);
       color: #222;
-      position: fixed; /* makes it move anywhere on screen on mobile */
-      left: 50%;
-      top: calc(50% + 120px);
-      transform: translateX(-50%);
-      z-index: 5;
+      position: absolute;
     }
 
     .moon {
@@ -98,7 +89,6 @@
       right: 18px;
       font-size: 34px;
       animation: float 3s ease-in-out infinite;
-      z-index: 2;
     }
 
     @keyframes float {
@@ -107,7 +97,6 @@
       100% { transform: translateY(0px); }
     }
 
-    /* Success screen */
     .success {
       text-align: center;
       width: min(640px, 92vw);
@@ -128,7 +117,6 @@
     .success p {
       margin: 0;
       font-size: clamp(15px, 3.6vw, 18px);
-      opacity: 0.95;
     }
 
     .time {
@@ -147,7 +135,6 @@
 
   <div class="card" id="card">
     <h1>Will you be my Iftar this Wednesday, SK? ❤️‍🩹</h1>
-    <p class="sub">Pick one… wisely 😈</p>
 
     <div class="btns">
       <button id="yesBtn">YES ❤️</button>
@@ -160,41 +147,25 @@
     const noBtn = document.getElementById("noBtn");
     const card = document.getElementById("card");
 
-    // Start NO button in a reasonable spot on all screens
-    function placeNoInitial() {
-      const maxX = window.innerWidth - noBtn.offsetWidth;
-      const maxY = window.innerHeight - noBtn.offsetHeight;
-      const x = Math.max(12, Math.min(maxX - 12, (window.innerWidth / 2) - (noBtn.offsetWidth / 2)));
-      const y = Math.max(12, Math.min(maxY - 12, (window.innerHeight / 2) + 140));
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-      noBtn.style.transform = "none";
+    function positionNo() {
+      const cardRect = card.getBoundingClientRect();
+      const maxX = cardRect.width - noBtn.offsetWidth;
+      const maxY = cardRect.height - noBtn.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
     }
 
-    // Move NO to a random place but keep it on-screen
-    function moveNo() {
-      const padding = 14;
-      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-
-      const x = Math.floor(Math.random() * Math.max(1, maxX - padding)) + padding;
-      const y = Math.floor(Math.random() * Math.max(1, maxY - padding)) + padding;
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-      noBtn.style.transform = "none";
-    }
-
-    // Mobile-friendly: move on touchstart and click
-    noBtn.addEventListener("mouseenter", moveNo);
-    noBtn.addEventListener("click", moveNo);
-    noBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault(); // prevents accidental click
-      moveNo();
+    noBtn.addEventListener("mouseenter", positionNo);
+    noBtn.addEventListener("touchstart", function(e) {
+      e.preventDefault();
+      positionNo();
     }, { passive: false });
 
-    // YES behavior
-    yesBtn.addEventListener("click", () => {
+    yesBtn.addEventListener("click", function() {
       document.body.innerHTML = `
         <div class="moon">🌙✨</div>
         <div class="success">
@@ -204,10 +175,6 @@
         </div>
       `;
     });
-
-    // Ensure it works after load + on screen rotation
-    window.addEventListener("load", placeNoInitial);
-    window.addEventListener("resize", placeNoInitial);
   </script>
 </body>
 </html>
