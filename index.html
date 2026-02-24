@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iftar Invitation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
+            background-color: #f0f0f0;
         }
-
         h1 {
-            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
-
-        button {
-            padding: 10px 20px;
-            margin: 10px;
+        .button {
+            padding: 15px 25px;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            transition: transform 0.3s,
+                        background-color 0.3s;
         }
-
-        .yes-btn {
-            background-color: #4CAF50; /* Green */
+        .yes {
+            background-color: green;
             color: white;
         }
-
-        .no-btn {
-            background-color: #f44336; /* Red */
+        .no {
+            background-color: red;
             color: white;
         }
-
-        .message {
-            display: none;
-            margin-top: 20px;
-            font-size: 18px;
-            color: #388e3c; /* Green */
+        .no:hover {
+            position: relative;
+            animation: runAway 0.5s forwards;
+        }
+        @keyframes runAway {
+            transform: translateX(-50px);
         }
     </style>
 </head>
-
 <body>
-    <h1>Would you be my Iftar this Wednesday, SK?❤️‍🩹</h1>
-    <button class="yes-btn" onclick="showMessage('Thank you! See you then!')">YES</button>
-    <button class="no-btn" onclick="showMessage('Maybe next time!')">NO</button>
-    <p class="message" id="successMessage"></p>
+    <h1>Would you be my Iftar this Wednesday, SK? ❤️‍🩹</h1>
+    <button class="button yes" onclick="showMessage()">YES</button>
+    <button class="button no" onmouseover="avoidNo(event)" ontouchstart="avoidNo(event)">NO</button>
 
     <script>
-        function showMessage(message) {
-            var successMessage = document.getElementById('successMessage');
-            successMessage.textContent = message;
-            successMessage.style.display = 'block';
+        let yesButton = document.querySelector('.yes');
+        let noButton = document.querySelector('.no');
+        let clickCount = 0;
+
+        function showMessage() {
+            alert('Expected, Love you hehe. Will Pick you at 05:00 PM');
+        }
+
+        function avoidNo(event) {
+            clickCount++;
+            let factor = clickCount * 0.1;
+            yesButton.style.transform = `scale(${1 + factor})`;
         }
     </script>
 </body>
-
 </html>
