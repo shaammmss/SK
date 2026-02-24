@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Iftar Invitation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Buttons</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        #yesButton, #noButton {
+            padding: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.5s;
+        }
+        #yesButton {
+            background-color: green;
+            color: white;
+        }
+        #noButton {
+            background-color: red;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1>Will you be my Iftar this Wednesday, SK? ❤️</h1>
-    <p>Success: Love you then… I'm picking you up before Maghrib 😌🌙💛</p>
+
+    <button id="yesButton">YES</button>
+    <button id="noButton">NO</button>
+
+    <script>
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+
+        yesButton.addEventListener('mouseenter', function() {
+            yesButton.style.transform = 'scale(1.5)';
+        });
+        
+        yesButton.addEventListener('mouseleave', function() {
+            yesButton.style.transform = 'scale(1)';
+        });
+
+        noButton.addEventListener('click', function() {
+            const x = Math.random() * (window.innerWidth - noButton.clientWidth);
+            const y = Math.random() * (window.innerHeight - noButton.clientHeight);
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        });
+    </script>
+    
 </body>
 </html>
