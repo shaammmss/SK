@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,32 +8,60 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
         }
-        .container {
-            text-align: center;
-            margin-top: 50px;
+
+        h1 {
+            color: #333;
         }
+
         button {
             padding: 10px 20px;
-            font-size: 16px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+        }
+
+        .yes-btn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        .no-btn {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #388e3c; /* Green */
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Would you be my Iftar this Wednesday, SK?❤️‍🩹</h1>
-        <button id="yesButton">YES</button>
-        <button id="noButton">NO</button>
-        <div id="message" style="margin-top: 20px;"></div>
-    </div>
+    <h1>Would you be my Iftar this Wednesday, SK?❤️‍🩹</h1>
+    <button class="yes-btn" onclick="showMessage('Thank you! See you then!')">YES</button>
+    <button class="no-btn" onclick="showMessage('Maybe next time!')">NO</button>
+    <p class="message" id="successMessage"></p>
+
     <script>
-        document.getElementById('yesButton').addEventListener('touchend', function() {
-            document.getElementById('message').innerText = "Expected, Love you hehe. Will Pick you at 05:00 PM";
-        });
-        document.getElementById('noButton').addEventListener('touchend', function() {
-            document.getElementById('message').innerText = "Alright, maybe next time!";
-        });
+        function showMessage(message) {
+            var successMessage = document.getElementById('successMessage');
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+        }
     </script>
 </body>
+
 </html>
