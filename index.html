@@ -3,58 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Buttons</title>
+    <title>Iftar Invitation</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            overflow: hidden;
+            font-family: Arial, sans-serif;
         }
-        #yesButton, #noButton {
-            padding: 20px;
-            font-size: 20px;
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
             cursor: pointer;
-            border: none;
-            transition: all 0.5s;
-        }
-        #yesButton {
-            background-color: green;
-            color: white;
-        }
-        #noButton {
-            background-color: red;
-            color: white;
         }
     </style>
 </head>
 <body>
-
-    <button id="yesButton">YES</button>
-    <button id="noButton">NO</button>
-
+    <div class="container">
+        <h1>Would you be my Iftar this Wednesday, SK?❤️‍🩹</h1>
+        <button id="yesButton">YES</button>
+        <button id="noButton">NO</button>
+        <div id="message" style="margin-top: 20px;"></div>
+    </div>
     <script>
-        const yesButton = document.getElementById('yesButton');
-        const noButton = document.getElementById('noButton');
-
-        yesButton.addEventListener('mouseenter', function() {
-            yesButton.style.transform = 'scale(1.5)';
+        document.getElementById('yesButton').addEventListener('touchend', function() {
+            document.getElementById('message').innerText = "Expected, Love you hehe. Will Pick you at 05:00 PM";
         });
-        
-        yesButton.addEventListener('mouseleave', function() {
-            yesButton.style.transform = 'scale(1)';
-        });
-
-        noButton.addEventListener('click', function() {
-            const x = Math.random() * (window.innerWidth - noButton.clientWidth);
-            const y = Math.random() * (window.innerHeight - noButton.clientHeight);
-            noButton.style.position = 'absolute';
-            noButton.style.left = `${x}px`;
-            noButton.style.top = `${y}px`;
+        document.getElementById('noButton').addEventListener('touchend', function() {
+            document.getElementById('message').innerText = "Alright, maybe next time!";
         });
     </script>
-    
 </body>
 </html>
