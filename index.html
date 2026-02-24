@@ -1,180 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Be My Iftar? 🌙</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Be My Iftar 🌙</title>
 
-  <style>
-    :root {
-      --bg1: #fff5e6;
-      --bg2: #ffd6a5;
-      --text: #1f1f1f;
-      --yes: #ff4d6d;
-      --no: #d9d9d9;
-    }
+<style>
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: url("IMG_2099.jpeg") no-repeat center center;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
 
-    body {
-      margin: 0;
-      min-height: 100svh;
-      display: grid;
-      place-items: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: linear-gradient(to bottom, var(--bg1), var(--bg2));
-      color: var(--text);
-      overflow: hidden;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+/* Dark overlay for readability */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+  z-index: 0;
+}
 
-    .card {
-      width: min(520px, 92vw);
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 18px;
-      padding: 26px 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      backdrop-filter: blur(10px);
-      text-align: center;
-      position: relative;
-    }
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(520px, 92vw);
+  background: rgba(255,255,255,0.88);
+  border-radius: 20px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
 
-    h1 {
-      margin: 0 0 20px;
-      font-size: clamp(26px, 5vw, 38px);
-      line-height: 1.15;
-    }
+h1 {
+  margin: 0 0 35px;
+  font-size: clamp(24px, 5vw, 36px);
+  color: #222;
+}
 
-    .btns {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
 
-    button {
-      -webkit-tap-highlight-color: transparent;
-      padding: 14px 22px;
-      font-size: 18px;
-      border: 0;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-      user-select: none;
-      touch-action: manipulation;
-      min-width: 120px;
-    }
+button {
+  padding: 14px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  min-width: 130px;
+}
 
-    button:active {
-      transform: scale(0.98);
-      box-shadow: 0 5px 12px rgba(0,0,0,0.12);
-    }
+#yesBtn {
+  background: #ff4d6d;
+  color: white;
+  box-shadow: 0 8px 20px rgba(255,77,109,0.4);
+}
 
-    #yesBtn {
-      background: var(--yes);
-      color: white;
-    }
+#noBtn {
+  background: #e0e0e0;
+  color: #222;
+  position: absolute;
+  right: 0;
+}
 
-    #noBtn {
-      background: var(--no);
-      color: #222;
-      position: absolute;
-    }
+.success {
+  position: relative;
+  z-index: 1;
+  width: min(600px, 92vw);
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  padding: 50px 20px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
 
-    .moon {
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      font-size: 34px;
-      animation: float 3s ease-in-out infinite;
-    }
+.success h2 {
+  font-size: clamp(26px, 5vw, 40px);
+  margin-bottom: 15px;
+}
 
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(10px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .success {
-      text-align: center;
-      width: min(640px, 92vw);
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 18px;
-      padding: 28px 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      backdrop-filter: blur(10px);
-    }
-
-    .success h2 {
-      margin: 0 0 10px;
-      font-size: clamp(24px, 5vw, 40px);
-      line-height: 1.15;
-    }
-
-    .success p {
-      margin: 0;
-      font-size: clamp(15px, 3.6vw, 18px);
-    }
-
-    .time {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: rgba(0,0,0,0.06);
-      font-weight: 700;
-    }
-  </style>
+.time {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 22px;
+}
+</style>
 </head>
 
 <body>
-  <div class="moon">🌙✨</div>
 
-  <div class="card" id="card">
-    <h1>Will you be my Iftar this Wednesday, SK? ❤️‍🩹</h1>
+<div class="card" id="card">
+  <h1>Will you be my Iftar this Wednesday, SK? ❤️‍🩹</h1>
 
-    <div class="btns">
-      <button id="yesBtn">YES ❤️</button>
-      <button id="noBtn">NO 🙈</button>
-    </div>
+  <div class="buttons">
+    <button id="yesBtn">YES ❤️</button>
+    <button id="noBtn">NO 🙈</button>
   </div>
+</div>
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const card = document.getElementById("card");
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const card = document.getElementById("card");
 
-    function positionNo() {
-      const cardRect = card.getBoundingClientRect();
-      const maxX = cardRect.width - noBtn.offsetWidth;
-      const maxY = cardRect.height - noBtn.offsetHeight;
+/* Move NO randomly inside card */
+function moveNo() {
+  const cardRect = card.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
 
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
+  const maxX = cardRect.width - btnRect.width - 20;
+  const maxY = cardRect.height - btnRect.height - 20;
 
-      noBtn.style.left = randomX + "px";
-      noBtn.style.top = randomY + "px";
-    }
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
 
-    noBtn.addEventListener("mouseenter", positionNo);
-    noBtn.addEventListener("touchstart", function(e) {
-      e.preventDefault();
-      positionNo();
-    }, { passive: false });
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
 
-    yesBtn.addEventListener("click", function() {
-      document.body.innerHTML = `
-        <div class="moon">🌙✨</div>
-        <div class="success">
-          <h2>Expected, Love you hehe ❤️‍🩹</h2>
-          <p>Will pick you up at</p>
-          <div class="time">05:00 PM</div>
-        </div>
-      `;
-    });
-  </script>
+/* Desktop hover */
+noBtn.addEventListener("mouseenter", moveNo);
+
+/* Mobile touch */
+noBtn.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  moveNo();
+}, { passive: false });
+
+/* YES click */
+yesBtn.addEventListener("click", function() {
+  document.body.innerHTML = `
+    <div class="success">
+      <h2>Expected, Love you hehe ❤️‍🩹</h2>
+      <div class="time">Will pick you up at 05:00 PM</div>
+    </div>
+  `;
+});
+</script>
+
 </body>
 </html>
