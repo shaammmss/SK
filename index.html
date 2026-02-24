@@ -1,67 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iftar Invitation</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+        .no-button {
+            pointer-events: none; /* Makes the button unclickable */
         }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
+        .no-button:hover {
+            /* Hide the button when hovered */
+            display: none;
         }
-        .button {
-            padding: 15px 25px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s,
-                        background-color 0.3s;
-        }
-        .yes {
-            background-color: green;
-            color: white;
-        }
-        .no {
-            background-color: red;
-            color: white;
-        }
-        .no:hover {
-            position: relative;
-            animation: runAway 0.5s forwards;
-        }
-        @keyframes runAway {
-            transform: translateX(-50px);
+        .no-button:active {
+            /* Hide the button when touched on mobile */
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Would you be my Iftar this Wednesday, SK? ❤️‍🩹</h1>
-    <button class="button yes" onclick="showMessage()">YES</button>
-    <button class="button no" onmouseover="avoidNo(event)" ontouchstart="avoidNo(event)">NO</button>
-
-    <script>
-        let yesButton = document.querySelector('.yes');
-        let noButton = document.querySelector('.no');
-        let clickCount = 0;
-
-        function showMessage() {
-            alert('Expected, Love you hehe. Will Pick you at 05:00 PM');
-        }
-
-        function avoidNo(event) {
-            clickCount++;
-            let factor = clickCount * 0.1;
-            yesButton.style.transform = `scale(${1 + factor})`;
-        }
-    </script>
+    <button class="no-button">NO</button>
 </body>
 </html>
